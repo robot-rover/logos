@@ -17,7 +17,8 @@ impl<'a> Generator<'a> {
         state_data: &StateData,
         ignore_self: bool,
     ) -> TokenStream {
-        if state_data.normal.len() > 2 {
+        let targets = state_data.normal.iter().filter(|(_bc, s)| !ignore_self || s != &state).count();
+        if targets > 2 {
             self.impl_fork_table(state, state_data, ignore_self)
         } else {
             self.impl_fork_match(state, state_data, ignore_self)
