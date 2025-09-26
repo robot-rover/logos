@@ -78,8 +78,10 @@ mod advanced {
                 (Ok(Token::LiteralString), "\"foobar\"", 4..12),
                 (Ok(Token::LiteralString), "\"escaped\\\"quote\"", 13..29),
                 (Ok(Token::LiteralString), "\"escaped\\nnew line\"", 30..49),
-                (Err(()), "\"\\x", 50..53),
-                (Err(()), "\" ", 53..55),
+                (Err(()), "\"", 50..51),
+                (Err(()), "\\", 51..52),
+                (Err(()), "x", 52..53),
+                (Err(()), "\"", 53..54),
             ],
         );
     }
