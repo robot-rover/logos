@@ -61,9 +61,9 @@ The idea for our parser will be the following:
    - It recognizes `Id`s and may encounter nested strings. Upon finding a quote (`'`), it transitions back to `StringContext` to start lexing the nested string.
    - The closing curly brace (`}`) signals the end of the interpolation, allowing a return to `StringContext` to continue lexing the original string.
 
-We also want to store the values for each defined variable in a map, enabling us to replace their values during interpolation. To achieve this, we utilized [`Logos::Extras`](./extras.md), adding a hash map (`SymbolTable`) to the lexers to keep track of variable definitions.
+We also want to store the values for each defined variable in a map, enabling us to replace their values during interpolation. To achieve this, we utilized [`Logos::Extras`](../extras.md), adding a hash map (`SymbolTable`) to the lexers to keep track of variable definitions.
 
-Additionally, we incorporated some [callbacks](./callbacks.md) to handle the heavy lifting. These callbacks will process the string content, manage context transitions, and perform interpolation evaluation. As a result, we’ll have the final key-value pairs stored in our main lexer, ready for use.
+Additionally, we incorporated some [callbacks](../callbacks.md) to handle the heavy lifting. These callbacks will process the string content, manage context transitions, and perform interpolation evaluation. As a result, we’ll have the final key-value pairs stored in our main lexer, ready for use.
 
 Below is an example of how the main function of our parser would look like:
 
@@ -86,7 +86,7 @@ This callback is triggered when the `VariableDefinitionContext` lexer finds an `
 - After that we clone the lexer and transition to `StringContext` using the `morph` method. Note that cloning is necessary because `morph` takes ownership of the lexer but callbacks only get a mutable reference to it.
 - In the `StringContext` we call the `get_string_content` function which parses the content of the string, concatenating all its parts into `value`.
 - Once the closing `Quote` (`'`) is found, we transition back to `VariableDefinitionContext`.
-- Lastly we insert the key-value pair into the symbol table and return the `(id, value)` touple which Logos will assign to the `Id` token.
+- Lastly we insert the key-value pair into the symbol table and return the `(id, value)` tuple which Logos will assign to the `Id` token.
 
 ### `evaluate_interpolation`
 
