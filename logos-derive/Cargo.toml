@@ -1,11 +1,13 @@
 [dependencies]
-logos-codegen = {version = "0.15.1", path = "../logos-codegen"}
+logos-codegen = {version = "0.16.0", path = "../logos-codegen"}
 
 [features]
 # Enables debug messages
 debug = ["logos-codegen/debug"]
 # Don't use or generate unsafe code
 forbid_unsafe = ["logos-codegen/forbid_unsafe"]
+# Use the state machine codegen instead of the tailcall codegen
+state_machine_codegen = ["logos-codegen/state_machine_codegen"]
 
 [lib]
 bench = false
@@ -24,6 +26,7 @@ readme.workspace = true
 repository.workspace = true
 rust-version.workspace = true
 version.workspace = true
+include.workspace = true
 
 [package.metadata.release]
 shared-version = true

@@ -25,7 +25,7 @@ enum Token {
     // Callbacks can use closure syntax, or refer
     // to a function defined elsewhere.
     //
-    // Each pattern can have it's own callback.
+    // Each pattern can have its own callback.
     #[regex("[0-9]+", |lex| lex.slice().parse().ok())]
     #[regex("[0-9]+k", kilo)]
     #[regex("[0-9]+m", mega)]
@@ -68,4 +68,4 @@ where regular expressions are too limiting. For specifics look at
 [`Lexer::remainder`](https://docs.rs/logos/latest/logos/struct.Lexer.html#method.remainder) and
 [`Lexer::bump`](https://docs.rs/logos/latest/logos/struct.Lexer.html#method.bump).
 
-Callbacks can also be used with #[logos(skip)], in which case the callback should return `Skip` or `()`.
+Callbacks can also be used with `#[logos(skip)]`, in which case the callback should return `Skip` or `()`.
